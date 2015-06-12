@@ -1,36 +1,142 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-  <head>
-    <title>Layout</title>
-    <link rel="stylesheet"
-      th:href="@{/css/bootstrap.min.css}"
-      href="../../css/bootstrap.min.css"/>
-<link rel="stylesheet"
-      th:href="@{/css/core.css}"
-      href="../../css/core.css"/>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="utf-8" ></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"  ></meta>
+<meta name="description" content=""  ></meta>
+<meta name="author" content=""  ></meta>
+<title>iPlan | Supreme Timemanagement</title>
+<link th:href="@{css/bootstrap.min.css}"
+	href="../static/css/bootstrap.min.css" rel="stylesheet" ></link>
+<link th:href="@{css/font-awesome.min.css}"
+	href="../static/css/bootstrap.min.css" rel="stylesheet"></link>
+<link th:href="@{css/main.css}" href="../static/css/main.css"
+	rel="stylesheet" ></link>
+<link th:href="@{css/fullcalendar.min.css}"
+	href="../static/css/fullcalendar.min.css" rel='stylesheet'></link>
+<link th:href="@{css/jquery.fileupload.css}"
+	href="../static/css/jquery.fileupload.css" rel="stylesheet" ></link>
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
 
-  </head>
-  <body>
-    <div class="container">
-      <div class="navbar">
-        <div class="navbar-inner">
-          <a class="brand"
-              href="https://github.com/ultraq/thymeleaf-layout-dialect">
-              Thymeleaf - Layout
-          </a>
-          <ul class="nav">
-            <li>
-              <a th:href="@{/}" href="messages.html">
-                Messages
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <h1 layout:fragment="header">Layout</h1>
-      <div layout:fragment="content">
-        Fake content
-      </div>
-    </div>
-  </body>
+<script th:src="@{js/moment.min.js}"></script>
+
+<script type='text/javascript'
+	src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script th:src="@{js/fullcalendar.min.js}"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/lang/de-at.js"></script>
+<script th:src="@{js/home.js}" src="../static/js/home.js"></script>
+
+<script th:src="@{js/jquery.ui.widget.js}"
+	src="../static/js/jquery.ui.widget.js"></script>
+
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script th:src="@{js/jquery.iframe-transport.js}"
+	src="../static/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script th:src="@{js/jquery.fileupload.js}"
+	src="../static/js/jquery.fileupload.js"></script>
+</head>
+<!--/head-->
+
+<body data-spy="scroll" data-target="#navbar" data-offset="0">
+	<div id="progress" class="progress">
+		<div class="progress-bar progress-bar-success"></div>
+	</div>
+	<header id="header" role="banner">
+
+		<div class="container">
+
+			<div id="navbar" class="navbar navbar-default">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand text-right" href="index.html"><span
+						class="h1 "><abbr title="Awesome Time Manager">iPlan</abbr></span></a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#main-slider"><i
+								class="icon-home"></i></a></li>
+						<li><a href="#services">Neuer Kalender</a></li>
+						<li><a class=" fileinput-button"> <span>Importieren</span>
+								<!-- The file input field used as target for the file upload widget -->
+								<input id="fileupload" type="file" name="calendarfile" />
+						</a></li>
+						<li><a href="#pricing">Exportieren</a></li>
+						<li><a href="#about-us">About Us</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--/#header-->
+
+	<section id="main-slider">
+		<div class="carousel-inner">
+			<div class="item active">
+				<div class="container">
+					<div id="calendar"></div>
+				</div>
+			</div>
+			<!--/.item-->
+		</div>
+		<!--/.carousel-inner-->
+
+		<div id="files" class="files"></div>
+		<br />
+
+	</section>
+	<!--/#main-slider-->
+
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
+						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
+					All Rights Reserved.
+				</div>
+
+			</div>
+		</div>
+	</footer>
+	<!--/#footer-->
+
+	<script>
+		$(function() {
+			'use strict';
+			// Change this to the location of your server-side upload handler:
+			var url = 'calendar/upload';
+			$('#fileupload').fileupload(
+					{
+						url : url,
+						dataType : 'json',
+						done : function(e, data) {
+							$.each(data.result.files, function(index, file) {
+								$('<p/>').text(file.name).appendTo('#files');
+							});
+						},
+						progressall : function(e, data) {
+							var progress = parseInt(data.loaded / data.total
+									* 100, 10);
+							$('#progress .progress-bar').css('width',
+									progress + '%');
+						}
+					}).prop('disabled', !$.support.fileInput).parent()
+					.addClass($.support.fileInput ? undefined : 'disabled');
+		});
+	</script>
+
+</body>
 </html>

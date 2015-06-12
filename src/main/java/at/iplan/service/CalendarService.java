@@ -1,8 +1,9 @@
 package at.iplan.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Service;
 
 import at.iplan.model.Activity;
 import at.iplan.model.Course;
@@ -13,6 +14,7 @@ import biweekly.component.VEvent;
 
 import com.google.common.collect.Maps;
 
+@Service
 public class CalendarService {
 	
 	private static long idCounter;
@@ -29,6 +31,9 @@ public class CalendarService {
 	
 	public IPlanCalendar parseFromICalFile(String content){
 		ICalendar ical = Biweekly.parse(content).first();
+		if(ical == null){
+			return null;
+		}
 		List<VEvent> events = ical.getEvents();
 		for(VEvent event : events){
 			System.out.println(event.getDateStart().getValue().toGMTString());

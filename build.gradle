@@ -1,16 +1,20 @@
 buildscript {
     repositories {
         mavenLocal()
+        jcenter()
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+        classpath("org.springframework:springloaded:1.2.3.RELEASE")
+        classpath 'com.bluepapa32:gradle-watch-plugin:0.1.5'
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
 apply plugin: 'eclipse'
+apply plugin: 'com.bluepapa32.watch'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -32,6 +36,18 @@ dependencies {
     testCompile 'junit:junit'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.4'
+compileJava {
+    //enable compilation in a separate daemon process
+    options.fork = true
+    //enable incremental compilation
+    options.incremental = true
 }
+
+watch {
+    java {
+        files files('src/main/java')
+        tasks 'compileJava'
+    }
+}
+
+task wrapper(type: Wrapper) { gradleVersion = '2.4'}
