@@ -16,6 +16,7 @@ public class Application {
 	
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
+		System.out.println("START!!!!");
 		SpringApplication.run(Application.class, args);
 	}
 

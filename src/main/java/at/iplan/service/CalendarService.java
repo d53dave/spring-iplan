@@ -1,8 +1,12 @@
 package at.iplan.service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.stereotype.Service;
 
 import at.iplan.model.Activity;
@@ -24,14 +28,24 @@ public class CalendarService {
 		IPlanCalendar cal = new IPlanCalendar();
 		cal.setId(this.getNewId());
 		
-		calendars.put(idCounter, cal);
-		
+		calendars.put(cal.getId(), cal);
+		System.out.println("Now having "+calendars.size()+ " Calendars");
+
+		Activity e = new Activity();
+		e.setId(0);
+		e.setStartTime(LocalDateTime.now());
+		e.setDuration(Duration.ofMinutes(40));
+		e.setName("testact");
+		e.setText("testtext");
+		cal.getActivities().add(e);
+		printCals();
 		return cal;
 	}
 	
 	public IPlanCalendar parseFromICalFile(String content){
 		ICalendar ical = Biweekly.parse(content).first();
 		if(ical == null){
+			System.out.println("LOLMate");
 			return null;
 		}
 		List<VEvent> events = ical.getEvents();
@@ -42,7 +56,10 @@ public class CalendarService {
 	}
 	
 	public IPlanCalendar getById(Long id){
-		return calendars.get(id);
+		System.out.println("Calendars contains id: "+calendars.containsKey(id));
+		IPlanCalendar cal = calendars.get(id);
+		System.out.println("Returning cal "+getReflectionString(cal));
+		return cal;
 	}
 	
 	public IPlanCalendar addCourseToCalendar(Long id, Course course){
@@ -80,5 +97,13 @@ public class CalendarService {
 			cal.getCourses().clear();
 		}
 		return cal;
+	}
+	
+	private void printCals(){
+		calendars.forEach((k,v) -> System.out.println(k+": "+getReflectionString(v)));
+	}
+	
+	private String getReflectionString(Object o){
+		return ReflectionToStringBuilder.toString(o, ToStringStyle.MULTI_LINE_STYLE);
 	}
 }

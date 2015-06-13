@@ -11,10 +11,11 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'spring-boot'
-apply plugin: 'eclipse'
 apply plugin: 'com.bluepapa32.watch'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply plugin: 'spring-boot'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -36,6 +37,21 @@ dependencies {
     testCompile 'junit:junit'
 }
 
+springBoot {
+    // when using spring loaded turn on noverify
+    noverify = true
+}
+
+
+
+watch {
+     java {
+        files fileTree(dir: 'src/main/java',
+                       include: '**/*.java')
+        tasks 'compileJava'
+    }
+}
+
 compileJava {
     //enable compilation in a separate daemon process
     options.fork = true
@@ -43,11 +59,5 @@ compileJava {
     options.incremental = true
 }
 
-watch {
-    java {
-        files files('src/main/java')
-        tasks 'compileJava'
-    }
-}
 
 task wrapper(type: Wrapper) { gradleVersion = '2.4'}

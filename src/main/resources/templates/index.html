@@ -2,30 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
-<meta charset="utf-8" ></meta>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"  ></meta>
-<meta name="description" content=""  ></meta>
-<meta name="author" content=""  ></meta>
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta name="description" content=""></meta>
+<meta name="author" content=""></meta>
 <title>iPlan | Supreme Timemanagement</title>
-<link th:href="@{css/bootstrap.min.css}"
-	href="../static/css/bootstrap.min.css" rel="stylesheet" ></link>
-<link th:href="@{css/font-awesome.min.css}"
-	href="../static/css/bootstrap.min.css" rel="stylesheet"></link>
-<link th:href="@{css/main.css}" href="../static/css/main.css"
-	rel="stylesheet" ></link>
+
 <link th:href="@{css/fullcalendar.min.css}"
 	href="../static/css/fullcalendar.min.css" rel='stylesheet'></link>
 <link th:href="@{css/jquery.fileupload.css}"
-	href="../static/css/jquery.fileupload.css" rel="stylesheet" ></link>
+	href="../static/css/jquery.fileupload.css" rel="stylesheet"></link>
 <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+    <link th:href="@{css/bootstrap.min.css}"
+	href="../static/css/bootstrap.min.css" rel="stylesheet"></link>
+<link th:href="@{css/font-awesome.min.css}"
+	href="../static/css/font-awesome.min.css" rel="stylesheet"></link>
+<link th:href="@{css/main.css}" href="../static/css/main.css"
+	rel="stylesheet"></link>
+	
+<link 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css" rel="stylesheet"></link>
 
-<script th:src="@{js/moment.min.js}"></script>
+<style>
+.ui-dialog
+{
+        z-index: 9999 !important;   
+}
+</style>
 
 <script type='text/javascript'
 	src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	
+	<script type='text/javascript'
+	src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+<script th:src="@{js/moment.min.js}"></script>
+
 
 <script th:src="@{js/fullcalendar.min.js}"></script>
 <script
@@ -65,25 +78,46 @@
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#main-slider"><i
-								class="icon-home"></i></a></li>
-						<li><a href="#services">Neuer Kalender</a></li>
-						<li><a class=" fileinput-button"> <span>Importieren</span>
+						<li><a class=" fileinput-button"> <span
+								class="glyphicon glyphicon-chevron-up">&nbsp;Importieren</span>
 								<!-- The file input field used as target for the file upload widget -->
 								<input id="fileupload" type="file" name="calendarfile" />
 						</a></li>
-						<li><a href="#pricing">Exportieren</a></li>
-						<li><a href="#about-us">About Us</a></li>
-						<li><a href="#contact">Contact</a></li>
+						<li><a href="#pricing"><span
+								class="glyphicon glyphicon-chevron-down">&nbsp;Exportieren</span></a></li>
+						<li><a id="addcourse" href="#contact"><span
+								class="glyphicon glyphicon-plus">&nbsp;Kurs</span></a></li>
+						<li><a href="#about-us"><span
+								class="glyphicon glyphicon-plus">&nbsp;Aktivität</span></a></li>
+						<li><a href="#contact"><span
+								class="glyphicon glyphicon-pencil">&nbsp;Optionen</span></a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</header>
 	<!--/#header-->
-
 	<section id="main-slider">
+		<h4>
+			<i class="fa fa-angle-right"></i> Ausstehende Freizeitaktivitäten
+		</h4>
+		<div id="external-events">
+			<div class="btn-lg external-event label label-theme btn-lg">My
+				Event 1</div>
+			<div class="external-event label label-success">My Event 2</div>
+			<div class="external-event label label-info">My Event 3</div>
+			<div class="external-event label label-warning">My Event 4</div>
+			<div class="external-event label label-danger">My Event 5</div>
+			<div class="external-event label label-default">My Event 6</div>
+			<div class="external-event label label-theme">My Event 7</div>
+			<div class="external-event label label-info">My Event 8</div>
+			<div class="external-event label label-success">My Event 9</div>
+			<p class="drop-after">
+				<input type="checkbox" id="drop-remove" /> Remove After Drop
+			</p>
+		</div>
 		<div class="carousel-inner">
+
 			<div class="item active">
 				<div class="container">
 					<div id="calendar"></div>
@@ -99,6 +133,73 @@
 	</section>
 	<!--/#main-slider-->
 
+	<section id="services">
+		<div class="container">
+			<div class="box first">
+
+				<div class="row">
+					<div class="center gap">
+						<h3>Statistiken</h3>
+					</div>
+					<!--/.center-->
+					<div class="col-md-4 col-sm-6">
+						<div class="center alert alert-info">
+							<h4><span
+								class="glyphicon glyphicon-repeat">&nbsp;Gesamt</span></h4>
+							<p>123 Stunden</p>
+						</div>
+					</div>
+					<!--/.col-md-4-->
+					<div class="col-md-4 col-sm-6">
+						<div class="center alert alert-info">
+							<h4><span
+								class="glyphicon glyphicon-book">&nbsp;Unterricht</span></h4>
+							<p>123 Stunden</p>
+						</div>
+					</div>
+					<!--/.col-md-4-->
+					<div class="col-md-4 col-sm-6">
+						<div class="center alert alert-info">
+							<h4><span
+								class="glyphicon glyphicon-headphones">&nbsp;Freizeit</span></h4>
+							<p>123 Stunden.</p>
+						</div>
+					</div>
+					<!--/.col-md-4-->
+					<div class="col-md-4 col-sm-6">
+						<div class="center alert alert-info">
+							<h4><span
+								class="glyphicon glyphicon-wrench">&nbsp;Nachbearbeitung</span></h4>
+							<p>123 Stunden</p>
+						</div>
+					</div>
+					<!--/.col-md-4-->
+					<div class="col-md-4 col-sm-6">
+						<div class="center alert alert-info">
+
+							<h4><span
+								class="glyphicon glyphicon-paperclip">&nbsp;Vorbereitung</span></h4>
+							<p>123 Stunden</p>
+						</div>
+					</div>
+					<!--/.col-md-4-->
+					<div class="col-md-4 col-sm-6">
+						<div class="center alert alert-info">
+							<h4><span
+								class="glyphicon glyphicon-stats">&nbsp;Restzeit</span></h4>
+							<p>123 Stunden</p>
+						</div>
+					</div>
+					<!--/.col-md-4-->
+				</div>
+				<!--/.row-->
+			</div>
+			<!--/.box-->
+		</div>
+		<!--/.container-->
+	</section>
+	<!--/#services-->
+
 	<footer id="footer">
 		<div class="container">
 			<div class="row">
@@ -113,10 +214,72 @@
 	</footer>
 	<!--/#footer-->
 
+	<div id="dialog-form" title="Create new user">
+		<p class="validateTips">All form fields are required.</p>
+
+		<form>
+			<fieldset>
+				<label for="name">Name</label> <input type="text" name="name"
+					id="name" value="Jane Smith"
+					class="text ui-widget-content ui-corner-all" /> <label
+					for="email">Email</label> <input type="text" name="email"
+					id="email" value="jane@smith.com"
+					class="text ui-widget-content ui-corner-all" /> <label
+					for="password">Password</label> <input type="password"
+					name="password" id="password" value="xxxxxxx"
+					class="text ui-widget-content ui-corner-all" />
+
+				<!-- Allow form submission with keyboard without duplicating the dialog button -->
+				<input type="submit" tabindex="-1"
+					style="position: absolute; top: -1000px" />
+			</fieldset>
+		</form>
+	</div>
+
 	<script>
 		$(function() {
 			'use strict';
-			// Change this to the location of your server-side upload handler:
+
+			// ADD COURSE
+			 var addCourseDialog, addCourseForm,
+			     addActivityDialog, addActivityForm,
+			     optionsDialog, optionsForm;
+			
+			function addUser(){
+				
+			};
+
+			addCourseDialog = $("#dialog-form").dialog({
+				autoOpen : false,
+				height : 300,
+				width : 350,
+				modal : true,
+				resizable: false,
+				draggable: false,
+				buttons : {
+					"Tu es!" : addUser,
+					"Abbruch" : function() {
+						addCourseDialog.dialog("close");
+					}
+				},
+				close : function() {
+					addCourseForm[0].reset();
+					//allFields.removeClass("ui-state-error");
+				}
+			});
+
+			addCourseForm = addCourseDialog.find("form").on("submit", function(event) {
+				event.preventDefault();
+				addUser();
+			});
+
+			$("#addcourse").on("click", function(e) {
+				e.preventDefault();
+				console.log("addcourse clicked!");
+				addCourseDialog.dialog("open");
+			});
+
+			//UPLOAD
 			var url = 'calendar/upload';
 			$('#fileupload').fileupload(
 					{
