@@ -16,29 +16,42 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    <link th:href="@{css/bootstrap.min.css}"
+<link th:href="@{css/bootstrap.min.css}"
 	href="../static/css/bootstrap.min.css" rel="stylesheet"></link>
 <link th:href="@{css/font-awesome.min.css}"
 	href="../static/css/font-awesome.min.css" rel="stylesheet"></link>
 <link th:href="@{css/main.css}" href="../static/css/main.css"
 	rel="stylesheet"></link>
-	
-<link 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css" rel="stylesheet"></link>
+<link th:href="@{css/jquery-ui-timepicker.css}"
+	href="../static/css/jquery-ui-timepicker.css" rel="stylesheet"></link>
+
+<link
+	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css"
+	rel="stylesheet"></link>
 
 <style>
-.ui-dialog
-{
-        z-index: 9999 !important;   
+.ui-dialog {
+	z-index: 9999 !important;
 }
+.ui-button-text {
+        font-size: .6em;
+    }
 </style>
 
 <script type='text/javascript'
 	src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	
-	<script type='text/javascript'
+
+<script type='text/javascript'
 	src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js'></script>
 <script th:src="@{js/moment.min.js}"></script>
 
+
+<script type='text/javascript' th:src="@{js/jquery-ui-timepicker.js}"
+	src="../static/js/jquery-ui-timepicker.js"></script>
+<script type='text/javascript'
+	src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/i18n/jquery-ui-timepicker-de.js'></script>
 
 <script th:src="@{js/fullcalendar.min.js}"></script>
 <script
@@ -98,23 +111,25 @@
 	</header>
 	<!--/#header-->
 	<section id="main-slider">
-		<h4>
-			<i class="fa fa-angle-right"></i> Ausstehende Freizeitaktivitäten
-		</h4>
-		<div id="external-events">
-			<div class="btn-lg external-event label label-theme btn-lg">My
-				Event 1</div>
-			<div class="external-event label label-success">My Event 2</div>
-			<div class="external-event label label-info">My Event 3</div>
-			<div class="external-event label label-warning">My Event 4</div>
-			<div class="external-event label label-danger">My Event 5</div>
-			<div class="external-event label label-default">My Event 6</div>
-			<div class="external-event label label-theme">My Event 7</div>
-			<div class="external-event label label-info">My Event 8</div>
-			<div class="external-event label label-success">My Event 9</div>
-			<p class="drop-after">
-				<input type="checkbox" id="drop-remove" /> Remove After Drop
-			</p>
+		<div class="center">
+			<h2>
+				<i class="fa fa-angle-right"></i> Ausstehende Freizeitaktivitäten
+			</h2>
+			<div id="external-events">
+				<div class="btn-lg external-event label label-theme btn-lg">My
+					Event 1</div>
+				<div class="external-event label label-success">My Event 2</div>
+				<div class="external-event label label-info">My Event 3</div>
+				<div class="external-event label label-warning">My Event 4</div>
+				<div class="external-event label label-danger">My Event 5</div>
+				<div class="external-event label label-default">My Event 6</div>
+				<div class="external-event label label-theme">My Event 7</div>
+				<div class="external-event label label-info">My Event 8</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<p class="drop-after">
+					<input type="checkbox" id="drop-remove" /> Remove After Drop
+				</p>
+			</div>
 		</div>
 		<div class="carousel-inner">
 
@@ -144,32 +159,36 @@
 					<!--/.center-->
 					<div class="col-md-4 col-sm-6">
 						<div class="center alert alert-info">
-							<h4><span
-								class="glyphicon glyphicon-repeat">&nbsp;Gesamt</span></h4>
+							<h4>
+								<span class="glyphicon glyphicon-repeat">&nbsp;Gesamt</span>
+							</h4>
 							<p>123 Stunden</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
 					<div class="col-md-4 col-sm-6">
 						<div class="center alert alert-info">
-							<h4><span
-								class="glyphicon glyphicon-book">&nbsp;Unterricht</span></h4>
+							<h4>
+								<span class="glyphicon glyphicon-book">&nbsp;Unterricht</span>
+							</h4>
 							<p>123 Stunden</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
 					<div class="col-md-4 col-sm-6">
 						<div class="center alert alert-info">
-							<h4><span
-								class="glyphicon glyphicon-headphones">&nbsp;Freizeit</span></h4>
+							<h4>
+								<span class="glyphicon glyphicon-headphones">&nbsp;Freizeit</span>
+							</h4>
 							<p>123 Stunden.</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
 					<div class="col-md-4 col-sm-6">
 						<div class="center alert alert-info">
-							<h4><span
-								class="glyphicon glyphicon-wrench">&nbsp;Nachbearbeitung</span></h4>
+							<h4>
+								<span class="glyphicon glyphicon-wrench">&nbsp;Nachbearbeitung</span>
+							</h4>
 							<p>123 Stunden</p>
 						</div>
 					</div>
@@ -177,16 +196,18 @@
 					<div class="col-md-4 col-sm-6">
 						<div class="center alert alert-info">
 
-							<h4><span
-								class="glyphicon glyphicon-paperclip">&nbsp;Vorbereitung</span></h4>
+							<h4>
+								<span class="glyphicon glyphicon-paperclip">&nbsp;Vorbereitung</span>
+							</h4>
 							<p>123 Stunden</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
 					<div class="col-md-4 col-sm-6">
 						<div class="center alert alert-info">
-							<h4><span
-								class="glyphicon glyphicon-stats">&nbsp;Restzeit</span></h4>
+							<h4>
+								<span class="glyphicon glyphicon-stats">&nbsp;Restzeit</span>
+							</h4>
 							<p>123 Stunden</p>
 						</div>
 					</div>
@@ -214,24 +235,105 @@
 	</footer>
 	<!--/#footer-->
 
-	<div id="dialog-form" title="Create new user">
+	<div id="dialog-form" title="Kurs hinzuf&uuml;gen">
 		<p class="validateTips">All form fields are required.</p>
 
-		<form>
+		<form id="courseAddForm">
 			<fieldset>
-				<label for="name">Name</label> <input type="text" name="name"
+				<label for="name">Name</label> 
+				<input type="text" name="name"
 					id="name" value="Jane Smith"
-					class="text ui-widget-content ui-corner-all" /> <label
-					for="email">Email</label> <input type="text" name="email"
-					id="email" value="jane@smith.com"
-					class="text ui-widget-content ui-corner-all" /> <label
-					for="password">Password</label> <input type="password"
-					name="password" id="password" value="xxxxxxx"
-					class="text ui-widget-content ui-corner-all" />
+					class="text ui-widget-content ui-corner-all" /> <br /> 
+				<label for="name">Text</label> 
+				<textarea form ="courseAddForm" name="text" id="textArea" cols="35"></textarea><br /> 
+				<label
+					for="Startzeit">Start</label> 
+				<input type="text" name="start"
+					id="startTime" value="14:00"
+					class="text ui-widget-content ui-corner-all" /> <br /> 
+				<label
+					for="Dauer">Dauer</label> 
+				<input type="text" name="duration"
+					id="endTime" value="0 h 45 min"
+					class="text ui-widget-content ui-corner-all" /> <br /> 
+				<label
+					for="Dauer">Vorbereitung</label> 
+				<input type="text"
+					name="preparation" id="preparation" value="0 h 15 min"
+					class="text ui-widget-content ui-corner-all" /> <br /> 
+				<label
+					for="Dauer">Nachbearbeitung</label> 
+				<input type="text"
+					name="rework" id="rework" value="0 h 30 min"
+					class="text ui-widget-content ui-corner-all" /> <br />
+					
+				 <label for="priority">Priorität:</label>
+				 <input id="priority" name="priority" />
 
 				<!-- Allow form submission with keyboard without duplicating the dialog button -->
 				<input type="submit" tabindex="-1"
 					style="position: absolute; top: -1000px" />
+
+				<script>
+				var spinner = $( "#priority" ).spinner();
+					$('#startTime').datetimepicker({
+						minDate : moment().startOf('week').toDate(),
+						maxDate : moment().endOf('week').toDate(),
+						addSliderAccess : true,
+						sliderAccessArgs : {
+							touchonly : false
+						},
+						stepMinute : 5
+					});
+
+					$('#endTime').timepicker(
+							{
+								timeFormat : "H 'h' m 'min'",
+								timeText : 'Dauer',
+								timeOnlyTitle : 'Dauer wählen',
+								hourMax : 8,
+								stepMinute : 5,
+								beforeShow : function(input) {
+									setTimeout(function() {
+										$(input).datepicker("widget").find(
+												".ui-datepicker-current")
+												.hide();
+									}, 1);
+								}
+							});
+
+					$('#rework').timepicker(
+							{
+								timeFormat : "H 'h' m 'min'",
+								timeText : 'Dauer',
+								timeOnlyTitle : 'Dauer wählen',
+								hourMax : 8,
+								stepMinute : 5,
+								beforeShow : function(input) {
+									setTimeout(function() {
+										$(input).datepicker("widget").find(
+												".ui-datepicker-current")
+												.hide();
+									}, 1);
+								}
+							});
+
+					$('#preparation').timepicker(
+							{
+								timeFormat : "H 'h' m 'min'",
+								timeText : 'Dauer',
+								timeOnlyTitle : 'Dauer wählen',
+								hourMax : 8,
+								stepMinute : 5,
+								beforeShow : function(input) {
+									setTimeout(function() {
+										$(input).datepicker("widget").find(
+												".ui-datepicker-current")
+												.hide();
+									}, 1);
+								}
+							});
+				</script>
 			</fieldset>
 		</form>
 	</div>
@@ -239,39 +341,58 @@
 	<script>
 		$(function() {
 			'use strict';
+			
+			var timeRegex = /^(\d+)\D+(\d+)\D+$/i;
+			
+			function getSeconds(hoursAndMinutes) {
+				if(timeRegex.test(hoursAndMinutes)){
+					var results = timeRegex.exec(hoursAndMinutes);
+					return Number(results[1])*3600 + Number(results[2])*60;
+				}
+				return 0;
+			}
 
 			// ADD COURSE
-			 var addCourseDialog, addCourseForm,
-			     addActivityDialog, addActivityForm,
-			     optionsDialog, optionsForm;
-			
-			function addUser(){
-				
-			};
+			var addCourseDialog, addCourseForm, addActivityDialog, addActivityForm, optionsDialog, optionsForm;
 
-			addCourseDialog = $("#dialog-form").dialog({
-				autoOpen : false,
-				height : 300,
-				width : 350,
-				modal : true,
-				resizable: false,
-				draggable: false,
-				buttons : {
-					"Tu es!" : addUser,
-					"Abbruch" : function() {
-						addCourseDialog.dialog("close");
-					}
-				},
-				close : function() {
-					addCourseForm[0].reset();
-					//allFields.removeClass("ui-state-error");
-				}
-			});
+			function addCourse() {
+				console.log("Adding course!");
+			}
+			;
 
-			addCourseForm = addCourseDialog.find("form").on("submit", function(event) {
-				event.preventDefault();
-				addUser();
-			});
+			addCourseDialog = $("#dialog-form")
+					.dialog(
+							{
+								autoOpen : false,
+								height : 500,
+								width : 400,
+								modal : true,
+								resizable : false,
+								draggable : false,
+								buttons : {
+									"Tu es!" : function() {
+										var $dial = $(this), 
+											name = $dial.find("input[name='name']").val(), 
+											start = $dial.find("input[name='start']").val(), 
+											duration = getSeconds($dial.find("input[name='duration']").val()), 
+											preparation = getSeconds($dial.find("input[name='preparation']").val()),
+											rework = getSeconds($dial.find("input[name='rework']").val());
+									},
+									"Abbruch" : function() {
+										addCourseDialog.dialog("close");
+									}
+								},
+								close : function() {
+									addCourseForm[0].reset();
+									//allFields.removeClass("ui-state-error");
+								}
+							});
+
+			addCourseForm = addCourseDialog.find("form").on("submit",
+					function(event) {
+						event.preventDefault();
+						addUser();
+					});
 
 			$("#addcourse").on("click", function(e) {
 				e.preventDefault();
@@ -299,6 +420,12 @@
 					}).prop('disabled', !$.support.fileInput).parent()
 					.addClass($.support.fileInput ? undefined : 'disabled');
 		});
+		
+		setTimeout(function() {
+			$('.fc-today').removeClass('fc-state-highlight'); //remove current day hightlight from calendar
+			//$('.fc-today').removeClass('fc-today'); //remove current day hightlight from calendar
+		}, 10);
+		
 	</script>
 
 </body>

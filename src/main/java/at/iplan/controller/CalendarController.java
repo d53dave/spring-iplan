@@ -3,20 +3,15 @@ package at.iplan.controller;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import sun.awt.HToolkit;
 import at.iplan.model.Activity;
+import at.iplan.model.Course;
 import at.iplan.model.IPlanCalendar;
 import at.iplan.service.CalendarService;
 
@@ -84,7 +79,7 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value = "{id}/activity/{aid}", method = RequestMethod.GET)
-	Activity updateActivity(@PathVariable Long id, @PathVariable Long aid) {
+	Activity getActivity(@PathVariable Long id, @PathVariable Long aid) {
 		IPlanCalendar cal = calendarService.getById(id);
 
 		return cal.getActivities().stream().filter(ac -> ac.getId().equals(aid)).findFirst().get();
@@ -104,11 +99,18 @@ public class CalendarController {
 		return activity;
 	}
 	
+	@RequestMapping(value = "{id}/activity/{cid}", method = RequestMethod.GET)
+	Course getCourse(@PathVariable Long id, @PathVariable Long cid) {
+		IPlanCalendar cal = calendarService.getById(id);
+
+		return cal.getCourses().stream().filter(ac -> ac.getId().equals(cid)).findFirst().get();
+	}
+	
 	@RequestMapping(value = "{id}/course/new", method = RequestMethod.POST)
-	IPlanCalendar newCourse(@PathVariable Long id, @RequestParam Activity activity) {
+	IPlanCalendar newCourse(@PathVariable Long id, @RequestParam Course course) {
 		IPlanCalendar cal = calendarService.getById(id);
 		if(cal != null){
-			cal.getActivities().add(activity);
+			cal.getCourses().add(course);
 		}
 		
 		return cal;
