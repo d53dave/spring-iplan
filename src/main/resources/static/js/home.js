@@ -9,7 +9,7 @@ $(function() {
 		    right:  ''
 		},
 		defaultView : 'agendaWeek',
-		defaultDate : '2015-02-12',
+		columnFormat: 'ddd',
 		editable : true,
 		allDaySlot : false,
 		maxTime : '22:00',

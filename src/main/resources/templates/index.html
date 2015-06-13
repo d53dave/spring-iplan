@@ -8,22 +8,17 @@
 <meta name="author" content=""></meta>
 <title>iPlan | Supreme Timemanagement</title>
 
-<link th:href="@{css/fullcalendar.min.css}"
-	href="../static/css/fullcalendar.min.css" rel='stylesheet'></link>
-<link th:href="@{css/jquery.fileupload.css}"
-	href="../static/css/jquery.fileupload.css" rel="stylesheet"></link>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.css" rel='stylesheet'></link>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/css/jquery.fileupload.min.css" rel="stylesheet"></link>
 <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<link th:href="@{css/bootstrap.min.css}"
-	href="../static/css/bootstrap.min.css" rel="stylesheet"></link>
-<link th:href="@{css/font-awesome.min.css}"
-	href="../static/css/font-awesome.min.css" rel="stylesheet"></link>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"></link>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"></link>
 <link th:href="@{css/main.css}" href="../static/css/main.css"
 	rel="stylesheet"></link>
-<link th:href="@{css/jquery-ui-timepicker.css}"
-	href="../static/css/jquery-ui-timepicker.css" rel="stylesheet"></link>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css" rel="stylesheet"></link>
 
 <link
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css"
@@ -34,8 +29,12 @@
 	z-index: 9999 !important;
 }
 .ui-button-text {
-        font-size: .6em;
-    }
+      font-size: .6em;
+ }
+ 
+ .ui-dialog-titlebar-close {
+    display: none;
+}
 </style>
 
 <script type='text/javascript'
@@ -45,15 +44,15 @@
 	src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
 <script type='text/javascript'
 	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js'></script>
-<script th:src="@{js/moment.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 
 
-<script type='text/javascript' th:src="@{js/jquery-ui-timepicker.js}"
-	src="../static/js/jquery-ui-timepicker.js"></script>
+<script type='text/javascript' 
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.js"></script>
 <script type='text/javascript'
 	src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/i18n/jquery-ui-timepicker-de.js'></script>
 
-<script th:src="@{js/fullcalendar.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/lang/de-at.js"></script>
 <script th:src="@{js/home.js}" src="../static/js/home.js"></script>
@@ -62,11 +61,9 @@
 	src="../static/js/jquery.ui.widget.js"></script>
 
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script th:src="@{js/jquery.iframe-transport.js}"
-	src="../static/js/jquery.iframe-transport.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.iframe-transport.min.js"></script>
 <!-- The basic File Upload plugin -->
-<script th:src="@{js/jquery.fileupload.js}"
-	src="../static/js/jquery.fileupload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload.min.js"></script>
 </head>
 <!--/head-->
 
@@ -118,7 +115,7 @@
 			<div id="external-events">
 				<div class="btn-lg external-event label label-theme btn-lg">My
 					Event 1</div>
-				<div class="external-event label label-success">My Event 2</div>
+				<div class="external-event label label-success badge">My Event 2</div>
 				<div class="external-event label label-info">My Event 3</div>
 				<div class="external-event label label-warning">My Event 4</div>
 				<div class="external-event label label-danger">My Event 5</div>
@@ -126,8 +123,19 @@
 				<div class="external-event label label-theme">My Event 7</div>
 				<div class="external-event label label-info">My Event 8</div>
 				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
+				<div class="external-event label label-success">My Event 9</div>
 				<p class="drop-after">
-					<input type="checkbox" id="drop-remove" /> Remove After Drop
+				<br />
+				<a class="btn btn-primary btn-lg" href="#" role="button">Do It!</a>
 				</p>
 			</div>
 		</div>
@@ -141,9 +149,6 @@
 			<!--/.item-->
 		</div>
 		<!--/.carousel-inner-->
-
-		<div id="files" class="files"></div>
-		<br />
 
 	</section>
 	<!--/#main-slider-->
@@ -162,7 +167,7 @@
 							<h4>
 								<span class="glyphicon glyphicon-repeat">&nbsp;Gesamt</span>
 							</h4>
-							<p>123 Stunden</p>
+							<p class="value">123 Stunden</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
@@ -171,7 +176,7 @@
 							<h4>
 								<span class="glyphicon glyphicon-book">&nbsp;Unterricht</span>
 							</h4>
-							<p>123 Stunden</p>
+							<p class="value">123 Stunden</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
@@ -180,7 +185,7 @@
 							<h4>
 								<span class="glyphicon glyphicon-headphones">&nbsp;Freizeit</span>
 							</h4>
-							<p>123 Stunden.</p>
+							<p class="value">123 Stunden.</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
@@ -189,7 +194,7 @@
 							<h4>
 								<span class="glyphicon glyphicon-wrench">&nbsp;Nachbearbeitung</span>
 							</h4>
-							<p>123 Stunden</p>
+							<p class="value">123 Stunden</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
@@ -199,7 +204,7 @@
 							<h4>
 								<span class="glyphicon glyphicon-paperclip">&nbsp;Vorbereitung</span>
 							</h4>
-							<p>123 Stunden</p>
+							<p class="value">123 Stunden</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
@@ -208,7 +213,7 @@
 							<h4>
 								<span class="glyphicon glyphicon-stats">&nbsp;Restzeit</span>
 							</h4>
-							<p>123 Stunden</p>
+							<p class="value">123 Stunden</p>
 						</div>
 					</div>
 					<!--/.col-md-4-->
@@ -236,40 +241,51 @@
 	<!--/#footer-->
 
 	<div id="dialog-form" title="Kurs hinzuf&uuml;gen">
-		<p class="validateTips">All form fields are required.</p>
-
 		<form id="courseAddForm">
 			<fieldset>
-				<label for="name">Name</label> 
-				<input type="text" name="name"
-					id="name" value="Jane Smith"
-					class="text ui-widget-content ui-corner-all" /> <br /> 
-				<label for="name">Text</label> 
-				<textarea form ="courseAddForm" name="text" id="textArea" cols="35"></textarea><br /> 
+			    <div class="form-group">
+					<label for="name">Name</label> 
+					<input type="text" name="name"
+						id="name" placeholder="Software Engineering"
+						class="text ui-widget-content ui-corner-all form-control" /> 
+				</div>
+			    <div class="form-group">
+					<label for="name">Text</label> 
+					<textarea form ="courseAddForm" name="text" id="textArea" cols="35" class="form-control" placeholder="Mein liebster Kurs..."></textarea>
+				</div>
+			    <div class="form-group">
 				<label
 					for="Startzeit">Start</label> 
 				<input type="text" name="start"
-					id="startTime" value="14:00"
-					class="text ui-widget-content ui-corner-all" /> <br /> 
-				<label
-					for="Dauer">Dauer</label> 
-				<input type="text" name="duration"
-					id="endTime" value="0 h 45 min"
-					class="text ui-widget-content ui-corner-all" /> <br /> 
-				<label
-					for="Dauer">Vorbereitung</label> 
-				<input type="text"
-					name="preparation" id="preparation" value="0 h 15 min"
-					class="text ui-widget-content ui-corner-all" /> <br /> 
-				<label
-					for="Dauer">Nachbearbeitung</label> 
-				<input type="text"
-					name="rework" id="rework" value="0 h 30 min"
-					class="text ui-widget-content ui-corner-all" /> <br />
-					
-				 <label for="priority">Priorität:</label>
-				 <input id="priority" name="priority" />
-
+					id="startTime" placeholder="13.06.2015 18:42"
+					class="text ui-widget-content ui-corner-all form-control" /> <br /> 
+				</div>
+				<div class="form-group">
+					<label
+						for="Dauer">Dauer</label> 
+					<input type="text" name="duration"
+						id="endTime" placeholder="0 h 45 min"
+						class="text ui-widget-content ui-corner-all form-control" />
+				</div>
+				<div class="form-group">
+					<label
+						for="Dauer">Vorbereitung</label> 
+					<input type="text"
+						name="preparation" id="preparation" placeholder="0 h 15 min"
+						class="text ui-widget-content ui-corner-all form-control" />
+				</div>
+				<div class="form-group">
+					<label
+						for="Dauer">Nachbearbeitung</label> 
+					<input type="text"
+						name="rework" id="rework" placeholder="0 h 30 min"
+						class="text ui-widget-content ui-corner-all form-control" />
+				</div>
+				<div class="form-group">
+					 <label for="priority">Priorität:</label>
+					 <input id="priority" name="priority" class="form-control" value="4"/>
+					 
+				</div>
 				<!-- Allow form submission with keyboard without duplicating the dialog button -->
 				<input type="submit" tabindex="-1"
 					style="position: absolute; top: -1000px" />
@@ -279,10 +295,7 @@
 					$('#startTime').datetimepicker({
 						minDate : moment().startOf('week').toDate(),
 						maxDate : moment().endOf('week').toDate(),
-						addSliderAccess : true,
-						sliderAccessArgs : {
-							touchonly : false
-						},
+						hourMin : 6,
 						stepMinute : 5
 					});
 
@@ -342,6 +355,13 @@
 		$(function() {
 			'use strict';
 			
+			var calendar;
+			
+			$.post( "calendar/get", function(data) {
+				console.log("Got calendar id "+data['id']);
+				calendar = data;
+			});
+			
 			var timeRegex = /^(\d+)\D+(\d+)\D+$/i;
 			
 			function getSeconds(hoursAndMinutes) {
@@ -351,6 +371,47 @@
 				}
 				return 0;
 			}
+			
+			function renderCalendar(calData){
+				$('#calendar').fullCalendar('removeEvents');
+
+				var mappedEvents = calData['courses'].forEach(function(elem){
+					
+					var event =
+							{
+							"start": elem['startTime'], 
+							"end": moment(elem['startTime']).add(elem['duration'], 'seconds'),
+							"title": elem['name'],
+							"text": elem['text'],
+							"id": elem['id']
+							};
+					
+					$("#calendar").fullCalendar( 'renderEvent', event, true ); 
+					
+					if(Number(elem['preparationTime']) > 0){
+						var event =
+						{
+						"start": moment(elem['startTime']).subtract(elem['preparationTime'], 'seconds'), 
+						"end": elem['startTime'], 
+						"title": "Vorbereitung\n"+elem['name'],
+						"id": elem['id'],
+						"color": "#E070E6"
+						};
+						$("#calendar").fullCalendar( 'renderEvent', event, true ); 
+					}
+					if(Number(elem['reworkTime']) > 0){
+						var event =
+						{
+						"start": moment(elem['startTime']).add(elem['duration'], 'seconds'),
+						"end": moment(elem['startTime']).add(elem['duration'], 'seconds').add(elem['reworkTime'], 'seconds'),
+						"title": "Nachbearbeitung\n"+elem['name'],
+						"id": elem['id'],
+						'color': '#B9E670'
+						};
+						$("#calendar").fullCalendar( 'renderEvent', event, true ); 
+					}
+				});
+			}
 
 			// ADD COURSE
 			var addCourseDialog, addCourseForm, addActivityDialog, addActivityForm, optionsDialog, optionsForm;
@@ -358,28 +419,54 @@
 			function addCourse() {
 				console.log("Adding course!");
 			}
-			;
+			
 
 			addCourseDialog = $("#dialog-form")
 					.dialog(
 							{
 								autoOpen : false,
-								height : 500,
+								height : 600,
 								width : 400,
 								modal : true,
 								resizable : false,
 								draggable : false,
+								open: function() {
+						            $('.ui-widget-overlay').bind('click', function() {
+						                $('#dialog-form').dialog('close');
+						            })
+						        },
 								buttons : {
+									"Abbruch" : function() {
+										addCourseDialog.dialog("close");
+									},
 									"Tu es!" : function() {
 										var $dial = $(this), 
 											name = $dial.find("input[name='name']").val(), 
+											text = $dial.find("textarea").val(), 
 											start = $dial.find("input[name='start']").val(), 
 											duration = getSeconds($dial.find("input[name='duration']").val()), 
 											preparation = getSeconds($dial.find("input[name='preparation']").val()),
-											rework = getSeconds($dial.find("input[name='rework']").val());
-									},
-									"Abbruch" : function() {
-										addCourseDialog.dialog("close");
+											rework = getSeconds($dial.find("input[name='rework']").val()),
+											priority = Number($dial.find("input[name='priority']").val());
+										
+										$.ajax({
+											  type: "POST",
+											  contentType: "application/json; charset=utf-8",
+											  url: "calendar/"+calendar['id']+"/course/new",
+											  data: JSON.stringify(course),
+											  success: function(data, textStatus, jqXHR){
+												  renderCalendar(data);
+												  addCourseDialog.dialog("close");
+											  },
+											  error: function(jqXHR, textStatus, errorThrown){
+												  if(errorThrown === "Forbidden"){
+													  alert("Dieser Kurs überschneidet sich mit einem anderen Kurs!");
+												  } else {
+													  alert("Fehler: "+errorThrown);
+												  }
+												  addCourseDialog.dialog("close");
+											  }
+											});
 									}
 								},
 								close : function() {
@@ -399,6 +486,7 @@
 				console.log("addcourse clicked!");
 				addCourseDialog.dialog("open");
 			});
+			
 
 			//UPLOAD
 			var url = 'calendar/upload';
@@ -422,9 +510,8 @@
 		});
 		
 		setTimeout(function() {
-			$('.fc-today').removeClass('fc-state-highlight'); //remove current day hightlight from calendar
-			//$('.fc-today').removeClass('fc-today'); //remove current day hightlight from calendar
-		}, 10);
+			$('.fc-today').removeClass('fc-today'); //remove current day hightlight from calendar
+		}, 1);
 		
 	</script>
 

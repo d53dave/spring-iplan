@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -25,6 +26,7 @@ import at.iplan.model.Activity;
 import at.iplan.model.Course;
 import at.iplan.model.IPlanCalendar;
 import at.iplan.service.CalendarService;
+import at.iplan.service.SchedulerService;
 
 @Controller
 @RequestMapping("/calendar")
@@ -32,6 +34,9 @@ public class CalendarController {
 
 	@Autowired
 	private CalendarService calendarService;
+	
+	@Autowired
+	private SchedulerService schedulerService;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
@@ -41,10 +46,19 @@ public class CalendarController {
 		return cal;
 	}
 
-	@RequestMapping(value = "new", method = RequestMethod.POST)
+	@RequestMapping(value = "get", method = RequestMethod.POST)
 	@ResponseBody
-	IPlanCalendar saveCalendar() {
-		return calendarService.createCalendar();
+	IPlanCalendar saveCalendar(HttpSession session) {
+		Long id = (Long) session.getAttribute("calendarId");
+		IPlanCalendar cal;
+		if(id == null){
+			cal = calendarService.createCalendar();
+			session.setAttribute("calendarId", cal.getId());
+		} else {
+			cal = calendarService.getById(id);
+		}
+		
+		return cal;
 	}
 
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
@@ -79,6 +93,7 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value = "{id}/activity/{aid}", method = RequestMethod.GET)
+	@ResponseBody
 	Activity getActivity(@PathVariable Long id, @PathVariable Long aid) {
 		IPlanCalendar cal = calendarService.getById(id);
 
@@ -86,7 +101,8 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value = "{id}/activity/{aid}", method = RequestMethod.POST)
-	Activity updateActivity(@PathVariable Long id, @PathVariable Long aid, @RequestParam Activity activity) {
+	@ResponseBody
+	Activity updateActivity(@PathVariable Long id, @PathVariable Long aid, @RequestBody Activity activity) {
 		IPlanCalendar cal = calendarService.getById(id);
 		if(cal != null && activity.getId() != null){
 			List<Activity> filtered = cal.getActivities().stream().filter(ac -> !ac.getId().equals(activity.getId())).collect(Collectors.toList());
@@ -99,24 +115,36 @@ public class CalendarController {
 		return activity;
 	}
 	
-	@RequestMapping(value = "{id}/activity/{cid}", method = RequestMethod.GET)
+	
+	
+	@RequestMapping(value = "{id}/course/new", method = RequestMethod.POST)
+	@ResponseBody
+	IPlanCalendar newCourse(@PathVariable Long id, @RequestBody Course course, HttpServletResponse response) {
+		IPlanCalendar cal = calendarService.getById(id);
+		System.out.println(schedulerService);
+		if(cal != null){
+			if(schedulerService.isNonOverlapping(cal, course)){
+				cal.getCourses().add(course);
+			} else {
+				response.setStatus(HttpStatus.FORBIDDEN.value());
+			}
+		} else {
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+		}
+		
+		return cal;
+	}
+	
+	@RequestMapping(value = "{id}/course/{cid}", method = RequestMethod.GET)
+	@ResponseBody
 	Course getCourse(@PathVariable Long id, @PathVariable Long cid) {
 		IPlanCalendar cal = calendarService.getById(id);
 
 		return cal.getCourses().stream().filter(ac -> ac.getId().equals(cid)).findFirst().get();
 	}
 	
-	@RequestMapping(value = "{id}/course/new", method = RequestMethod.POST)
-	IPlanCalendar newCourse(@PathVariable Long id, @RequestParam Course course) {
-		IPlanCalendar cal = calendarService.getById(id);
-		if(cal != null){
-			cal.getCourses().add(course);
-		}
-		
-		return cal;
-	}
-	
-	@RequestMapping(value = "{id}/activity/{cid}", method = RequestMethod.POST)
+	@RequestMapping(value = "{id}/course/{cid}", method = RequestMethod.POST)
+	@ResponseBody
 	IPlanCalendar updateCourse(@PathVariable Long id, @PathVariable Long cid,@RequestParam Activity activity) {
 		IPlanCalendar cal = calendarService.getById(id);
 		if(cal != null){
@@ -127,6 +155,7 @@ public class CalendarController {
 	}
 
 	@RequestMapping(value = "{id}/clear", method = RequestMethod.POST)
+	@ResponseBody
 	IPlanCalendar clearCalendar(@PathVariable Long id) {
 		calendarService.clearCalendar(id);
 		return calendarService.getById(id);

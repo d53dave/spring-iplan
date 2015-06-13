@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import at.iplan.model.Activity;
 import at.iplan.model.Course;
 import at.iplan.model.IPlanCalendar;
+import at.iplan.model.Options;
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
@@ -38,6 +39,8 @@ public class CalendarService {
 		e.setName("testact");
 		e.setText("testtext");
 		cal.getActivities().add(e);
+		
+		
 		printCals();
 		return cal;
 	}
@@ -95,6 +98,14 @@ public class CalendarService {
 		if(cal != null) {
 			cal.getActivities().clear();
 			cal.getCourses().clear();
+		}
+		return cal;
+	}
+	
+	public IPlanCalendar saveOptions(Long id, Options opt){
+		IPlanCalendar cal = this.getById(id);
+		if(cal != null) {
+			cal.setOptions(opt);
 		}
 		return cal;
 	}
