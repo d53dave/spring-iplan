@@ -42,7 +42,7 @@ public class CalendarItem {
 	@JsonIgnore
 	@Transient
 	public LocalDateTime getEndTime(){
-		return startTime.plusSeconds(duration.getSeconds());
+		return startTime.plus(duration);
 	}
 
 	

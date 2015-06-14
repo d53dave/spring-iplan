@@ -3,6 +3,7 @@ package at.iplan.model;
 public class Options {
 
 	private long freeDayCount;
+	private long workload;
 
 	public long getFreeDayCount() {
 		return freeDayCount;
@@ -10,6 +11,14 @@ public class Options {
 
 	public void setFreeDayCount(long freeDayCount) {
 		this.freeDayCount = freeDayCount;
+	}
+
+	public long getWorkload() {
+		return workload;
+	}
+
+	public void setWorkload(long workload) {
+		this.workload = workload;
 	}
 	
 }

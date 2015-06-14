@@ -29,13 +29,6 @@ public class Course extends CalendarItem{
 	public void setReworkTime(Duration reworkTime) {
 		this.reworkTime = reworkTime;
 	}
-	
-	@JsonIgnore
-	@Transient
-	@Override
-	public LocalDateTime getEndTime(){
-		return getStartTime().plus(getDuration().plus(reworkTime));
-	}
 
 	public Duration getPreparationTime() {
 		return preparationTime;
@@ -51,6 +44,18 @@ public class Course extends CalendarItem{
 
 	public void setPriority(Long priority) {
 		this.priority = priority;
+	}
+
+	@JsonIgnore
+	@Transient
+	public LocalDateTime getStartTimeWithPreparation() {
+		return getStartTime().minus(reworkTime);
+	}
+
+	@JsonIgnore
+	@Transient
+	public LocalDateTime getEndTimeWithRework() {
+		return getStartTime().plus(getDuration()).plus(reworkTime);
 	}
 	
 }
