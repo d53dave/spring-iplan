@@ -164,7 +164,7 @@ public class CalendarController {
 
 	@RequestMapping(value = "{id}/course/new", method = RequestMethod.POST)
 	@ResponseBody
-	IPlanCalendar newCourse(@PathVariable Long id, @RequestBody Course course,
+	Course newCourse(@PathVariable Long id, @RequestBody Course course,
 			HttpServletResponse response) {
 		IPlanCalendar cal = calendarService.getById(id);
 		System.out.println(schedulerService);
@@ -177,7 +177,7 @@ public class CalendarController {
 		} else {
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 		}
-		return cal;
+		return course;
 	}
 
 	@RequestMapping(value = "{id}/course/{cid}", method = RequestMethod.GET)
