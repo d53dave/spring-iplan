@@ -3,6 +3,7 @@ package at.iplan.controller;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
@@ -56,6 +57,10 @@ public class CalendarController {
 			session.setAttribute("calendarId", cal.getId());
 		} else {
 			cal = calendarService.getById(id);
+			if(cal == null){ // for debugging
+				cal = calendarService.createCalendar();
+				session.setAttribute("calendarId", cal.getId());
+			}
 		}
 		
 		return cal;
@@ -83,10 +88,13 @@ public class CalendarController {
 	
 	@RequestMapping(value = "{id}/activity/new", method = RequestMethod.POST)
 	@ResponseBody
-	Activity newActivity(@PathVariable Long id, @RequestBody Activity activity) {
+	Activity newActivity(@PathVariable Long id, @RequestBody Activity activity, HttpServletResponse response) {
 		IPlanCalendar cal = calendarService.getById(id);
 		if(cal != null){
-			cal.getActivities().add(activity);
+			boolean result = calendarService.scheduleActivity(cal, activity);
+			if(!result){
+				response.setStatus(HttpStatus.CONFLICT.value());
+			}
 		}
 		System.out.println("Added Activity "+ReflectionToStringBuilder.toString(activity, ToStringStyle.MULTI_LINE_STYLE));
 		return activity;
@@ -94,10 +102,14 @@ public class CalendarController {
 	
 	@RequestMapping(value = "{id}/activity/{aid}", method = RequestMethod.GET)
 	@ResponseBody
-	Activity getActivity(@PathVariable Long id, @PathVariable Long aid) {
+	Activity getActivity(@PathVariable Long id, @PathVariable Long aid, HttpServletResponse response) {
 		IPlanCalendar cal = calendarService.getById(id);
 
-		return cal.getActivities().stream().filter(ac -> ac.getId().equals(aid)).findFirst().get();
+		Optional<Activity> res = cal.getActivities().stream().filter(ac -> ac.getId().equals(aid)).findFirst();
+		if(!res.isPresent()){
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+		}
+		return res.orElse(null);
 	}
 	
 	@RequestMapping(value = "{id}/activity/{aid}", method = RequestMethod.POST)
@@ -137,10 +149,14 @@ public class CalendarController {
 	
 	@RequestMapping(value = "{id}/course/{cid}", method = RequestMethod.GET)
 	@ResponseBody
-	Course getCourse(@PathVariable Long id, @PathVariable Long cid) {
+	Course getCourse(@PathVariable Long id, @PathVariable Long cid, HttpServletResponse response) {
 		IPlanCalendar cal = calendarService.getById(id);
 
-		return cal.getCourses().stream().filter(ac -> ac.getId().equals(cid)).findFirst().get();
+		Optional<Course> res = cal.getCourses().stream().filter(c -> c.getId().equals(cid)).findFirst();
+		if(!res.isPresent()){
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+		}
+		return res.orElse(null);
 	}
 	
 	@RequestMapping(value = "{id}/course/{cid}", method = RequestMethod.POST)
@@ -157,8 +173,7 @@ public class CalendarController {
 	@RequestMapping(value = "{id}/clear", method = RequestMethod.POST)
 	@ResponseBody
 	IPlanCalendar clearCalendar(@PathVariable Long id) {
-		calendarService.clearCalendar(id);
-		return calendarService.getById(id);
+		return calendarService.clearCalendar(id);
 	}
 	
 	private String getReflectionString(Object o){

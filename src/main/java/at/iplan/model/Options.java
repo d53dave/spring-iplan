@@ -3,7 +3,7 @@ package at.iplan.model;
 public class Options {
 
 	private long freeDayCount;
-	private long workload;
+	private long workload = Long.MAX_VALUE;
 
 	public long getFreeDayCount() {
 		return freeDayCount;

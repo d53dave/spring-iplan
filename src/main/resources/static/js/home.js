@@ -25,6 +25,14 @@ $(function() {
 			dow : [ 1, 2, 3, 4, 5, 6 ]
 		},
 		eventLimit : true, // allow "more" link when too many events
+		eventClick: function(calEvent, jsEvent, view) {
+
+	        var del = confirm("Wollen Sie dieses Ereignis entfernen?");
+	        if(del){
+	        	$('#calendar').fullCalendar('removeEvents',calEvent._id);
+	        }
+
+	    },
 		events : [ {
 			title : 'All Day Event',
 			start : '2015-02-01'

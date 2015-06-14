@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 public class IPlanCalendar {
+	private static long internalIds;
 	
 	private Long id;
 	private List<Course> courses = Lists.newArrayList();
@@ -21,6 +22,24 @@ public class IPlanCalendar {
 
 	public List<Course> getCourses() {
 		return courses;
+	}
+	
+	public void addActivity(Activity activity){
+		if(activity.getId() == null){
+			activity.setId(getNextId());
+			activities.add(activity);
+		} else {
+			
+		}
+	}
+	
+	public void addCourse(Course course){
+		if(course.getId() == null){
+			course.setId(getNextId());
+			courses.add(course);
+		} else {
+			
+		}
 	}
 
 	public void setCourses(List<Course> courses) {
@@ -41,6 +60,10 @@ public class IPlanCalendar {
 
 	public void setOptions(Options options) {
 		this.options = options;
+	}
+	
+	private long getNextId(){
+		return internalIds++;
 	}
 
 }
