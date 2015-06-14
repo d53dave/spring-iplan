@@ -4,6 +4,11 @@ import java.beans.Transient;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import at.iplan.config.DurationDeserializer;
 import at.iplan.config.DurationSerializer;
 
@@ -20,7 +25,7 @@ public class Course extends CalendarItem{
 	@JsonDeserialize(using = DurationDeserializer.class)
 	private Duration preparationTime = Duration.ZERO;
 	
-	private Long priority;
+	private Long priority = 0l;
 
 	public Duration getReworkTime() {
 		return reworkTime;
@@ -56,6 +61,22 @@ public class Course extends CalendarItem{
 	@Transient
 	public LocalDateTime getEndTimeWithRework() {
 		return getStartTime().plus(getDuration()).plus(reworkTime);
+	}
+	
+	@Override
+	public String toString(){
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		System.out.println("Course "+this+" equals called");
+		return EqualsBuilder.reflectionEquals(this, o, "priority");
+	}
+	
+	@Override
+	public int hashCode(){
+		return HashCodeBuilder.reflectionHashCode(this, false);
 	}
 	
 }

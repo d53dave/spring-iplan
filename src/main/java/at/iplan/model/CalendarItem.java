@@ -9,7 +9,6 @@ import at.iplan.config.DurationSerializer;
 import at.iplan.config.LocalDateTimeDeserializer;
 import at.iplan.config.LocalDateTimeSerializer;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

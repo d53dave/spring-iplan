@@ -73,4 +73,9 @@ public class SchedulerServiceTest {
 
 		Assert.assertTrue(schedulerService.isNonOverlapping(cal, course2));
 	}
+	
+	@Test
+	public void scheduleActivityTest(){
+		
+	}
 }

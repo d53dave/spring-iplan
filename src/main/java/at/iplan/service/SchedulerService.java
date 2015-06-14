@@ -35,11 +35,18 @@ public class SchedulerService {
 
 			System.out.println("We have " + items.size() + " items.");
 
-			// check for workload TODO: GONE FROM HERE!!!
-			long workload = items.stream()
-					.mapToLong(item -> item.getDuration().toHours()).sum();
-			if (workload > calendar.getOptions().getWorkload())
+			// check for workload
+			long newWorkloadMinutes = items.stream()
+					.mapToLong(item -> item.getDuration().toMinutes()).sum() + activity.getDuration().toMinutes();
+			
+			long maxWorkloadMinutes = calendar.getOptions().getWorkload() * 60;
+			
+			System.out.println("Combined Workload for "+day+" would be "+newWorkloadMinutes/60+"h");
+			if (calendar.getOptions().getWorkload() > -1 && newWorkloadMinutes > maxWorkloadMinutes){
+				System.out.println("Aborted due to combined workload being "+newWorkloadMinutes+" max("+maxWorkloadMinutes+")");
 				return null;
+			}
+				
 
 			Duration activityDuration = activity.getDuration();
 
@@ -85,17 +92,16 @@ public class SchedulerService {
 					return LocalDateTime.of(dayDate, firstItemEnd);
 				}
 			}
-			LocalTime lastItemEnd = getEndTimeForItem(items
-					.get(items.size() - 1));
-			System.out.println(lastItemEnd.plus(activityDuration)
-					+ " is before midnight?");
+			
+			CalendarItem lastItem = items.get(items.size() - 1);
+			LocalTime lastItemEnd = getEndTimeForItem(lastItem);
+			LocalDateTime lastItemEndDateTime = lastItem.getStartTime().withHour(lastItemEnd.getHour()).withMinute(lastItemEnd.getMinute());
+			LocalDateTime latestAcceptableEnd = lastItemEndDateTime.withHour(22).withMinute(00);
+			
 			// after last activity
-			if (lastItemEnd.plus(activityDuration).isBefore(
-					LocalTime.of(21, 59))) { // after last and before midnight?
-				System.out.println("Adding as last at "
-						+ getEndTimeForItem(items.get(items.size() - 1)));
-				return LocalDateTime.of(dayDate,
-						getEndTimeForItem(items.get(items.size() - 1)));
+			if (lastItemEndDateTime.plus(activityDuration).isBefore(
+					latestAcceptableEnd)) {
+				return LocalDateTime.of(dayDate,lastItemEnd);
 			} else {
 				System.out.println("End After midnight, looking at next day!");
 			}

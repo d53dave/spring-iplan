@@ -1,630 +1,294 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-<head>
-<meta charset="utf-8"></meta>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-<meta name="description" content=""></meta>
-<meta name="author" content=""></meta>
-<title>iPlan | Supreme Timemanagement</title>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.css" rel='stylesheet'></link>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/css/jquery.fileupload.min.css" rel="stylesheet"></link>
-<!--[if lt IE 9]>
+<head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+    <title>iPlan | Supreme Timemanagement</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.css" rel='stylesheet'></link>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/css/jquery.fileupload.min.css" rel="stylesheet"></link>
+    <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"></link>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"></link>
-<link th:href="@{css/main.css}" href="../static/css/main.css"
-	rel="stylesheet"></link>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css" rel="stylesheet"></link>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"></link>
+    <link th:href="@{css/main.css}" href="../static/css/main.css" rel="stylesheet"></link>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css" rel="stylesheet"></link>
 
-<link
-	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css"
-	rel="stylesheet"></link>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css" rel="stylesheet"></link>
 
-<style>
-.ui-dialog {
-	z-index: 9999 !important;
-}
-.ui-button-text {
-      font-size: .6em;
- }
- 
- .ui-dialog-titlebar-close {
-    display: none;
-}
-</style>
+    <style>
+        .ui-dialog {
+            z-index: 9999 !important;
+        }
+        
+        .ui-button-text {
+            font-size: .6em;
+        }
+        
+        .ui-dialog-titlebar-close {
+            display: none;
+        }
+    </style>
 
-<script type='text/javascript'
-	src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-<script type='text/javascript'
-	src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
-<script type='text/javascript'
-	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js'></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js'></script>
+
+    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 
 
-<script type='text/javascript' 
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.js"></script>
-<script type='text/javascript'
-	src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/i18n/jquery-ui-timepicker-de.js'></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.js"></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/i18n/jquery-ui-timepicker-de.js'></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/lang/de-at.js"></script>
-<script th:src="@{js/home.js}" src="../static/js/home.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/lang/de-at.js"></script>
+    <!-- <script th:src="@{js/home.js}" src="../static/js/home.js"></script> -->
 
-<script th:src="@{js/jquery.ui.widget.js}"
-	src="../static/js/jquery.ui.widget.js"></script>
+    <script th:src="@{js/jquery.ui.widget.js}" src="../static/js/jquery.ui.widget.js"></script>
 
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.iframe-transport.min.js"></script>
-<!-- The basic File Upload plugin -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload.min.js"></script>
+    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.iframe-transport.min.js"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload.min.js"></script>
+
 </head>
 <!--/head-->
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
-	<div id="progress" class="progress">
-		<div class="progress-bar progress-bar-success"></div>
-	</div>
-	<header id="header" role="banner">
+    <div id="progress" class="progress">
+        <div class="progress-bar progress-bar-success"></div>
+    </div>
+    <header id="header" role="banner">
 
-		<div class="container">
+        <div class="container">
 
-			<div id="navbar" class="navbar navbar-default">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand text-right" href="index.html"><span
+            <div id="navbar" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand text-right" href="/"><span
 						class="h1 "><abbr title="Awesome Time Manager">iPlan</abbr></span></a>
-				</div>
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li><a class=" fileinput-button"> <span
-								class="glyphicon glyphicon-chevron-up">&nbsp;Importieren</span>
-								<!-- The file input field used as target for the file upload widget -->
-								<input id="fileupload" type="file" name="calendarfile" />
-						</a></li>
-						<li><a href="#pricing"><span
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class=" fileinput-button"> <span class="glyphicon glyphicon-chevron-up">&nbsp;Importieren</span>
+                                <!-- The file input field used as target for the file upload widget -->
+                                <input id="fileupload" type="file" name="calendarfile" />
+                            </a>
+                        </li>
+                        <li><a id="download" href="#"><span
 								class="glyphicon glyphicon-chevron-down">&nbsp;Exportieren</span></a></li>
-						<li><a id="addcourse" href="#contact"><span
+                        <li><a id="addcourse" href="#"><span
 								class="glyphicon glyphicon-plus">&nbsp;Kurs</span></a></li>
-						<li><a id="addactivity"  href="#about-us"><span
+                        <li><a id="addactivity" href="#"><span
 								class="glyphicon glyphicon-plus">&nbsp;Aktivität</span></a></li>
-						<li><a href="#contact"><span
+                        <li><a id="editoptions" href="#"><span
 								class="glyphicon glyphicon-pencil">&nbsp;Optionen</span></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!--/#header-->
-	<section id="main-slider">
-		
-		<div class="carousel-inner">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+    <section id="main-slider">
 
-			<div class="item active">
-				<div class="container">
-					<div id="calendar"></div>
-				</div>
-			</div>
-			<!--/.item-->
-		</div>
-		<!--/.carousel-inner-->
+        <div class="carousel-inner">
 
-	</section>
-	<!--/#main-slider-->
+            <div class="item active">
+                <div class="container">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+            <!--/.item-->
+        </div>
+        <!--/.carousel-inner-->
 
-	<section id="services">
-		<div class="container">
-			<div class="box first">
+    </section>
+    <!--/#main-slider-->
 
-				<div class="row">
-					<div class="center gap">
-						<h3>Statistiken</h3>
-					</div>
-					<!--/.center-->
-					<div class="col-md-4 col-sm-6">
-						<div class="center alert alert-info">
-							<h4>
+    <section id="services">
+        <div class="container">
+            <div class="box first">
+                <div class="row">
+                    <div class="center gap">
+                        <h3>Statistiken</h3>
+                    </div>
+                    <!--/.center-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center alert alert-info">
+                            <h4>
 								<span class="glyphicon glyphicon-repeat">&nbsp;Gesamt</span>
 							</h4>
-							<p class="value">22 Stunden</p>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-					<div class="col-md-4 col-sm-6">
-						<div class="center alert alert-info">
-							<h4>
+                            <p id="stat-total">22 Stunden</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center alert alert-info">
+                            <h4>
 								<span class="glyphicon glyphicon-book">&nbsp;Unterricht</span>
 							</h4>
-							<p class="value">16 Stunden</p>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-					<div class="col-md-4 col-sm-6">
-						<div class="center alert alert-info">
-							<h4>
+                            <p id="stat-course">16 Stunden</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center alert alert-info">
+                            <h4>
 								<span class="glyphicon glyphicon-headphones">&nbsp;Freizeit</span>
 							</h4>
-							<p class="value">18 Stunden.</p>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-					<div class="col-md-4 col-sm-6">
-						<div class="center alert alert-info">
-							<h4>
+                            <p id="stat-activity">18 Stunden.</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center alert alert-info">
+                            <h4>
 								<span class="glyphicon glyphicon-wrench">&nbsp;Nachbearbeitung</span>
 							</h4>
-							<p class="value">4 Stunden</p>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-					<div class="col-md-4 col-sm-6">
-						<div class="center alert alert-info">
+                            <p id="stat-rework">4 Stunden</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center alert alert-info">
 
-							<h4>
+                            <h4>
 								<span class="glyphicon glyphicon-paperclip">&nbsp;Vorbereitung</span>
 							</h4>
-							<p class="value">2 Stunden</p>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-					<div class="col-md-4 col-sm-6">
-						<div class="center alert alert-info">
-							<h4>
+                            <p id="stat-prep">2 Stunden</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center alert alert-info">
+                            <h4>
 								<span class="glyphicon glyphicon-stats">&nbsp;Restzeit</span>
 							</h4>
-							<p class="value">8 Stunden</p>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-				</div>
-				<!--/.row-->
-			</div>
-			<!--/.box-->
-		</div>
-		<!--/.container-->
-	</section>
-	<!--/#services-->
+                            <p id="stat-rest">8 Stunden</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.box-->
+        </div>
+        <!--/.container-->
+    </section>
+    <!--/#services-->
 
-	<footer id="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
-				</div>
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                </div>
 
-			</div>
-		</div>
-	</footer>
-	<!--/#footer-->
-	
-	<div id="dialog-form-activity" title="Aktivit&auml; hinzuf&uuml;gen">
-		<form id="activityAddForm">
-			<fieldset>
-			    <div class="form-group">
-					<label for="name">Name</label> 
-					<input type="text" name="name"
-						id="name-act" placeholder="Software Engineering"
-						class="text ui-widget-content ui-corner-all form-control" /> 
-				</div>
-			    <div class="form-group">
-					<label for="name">Text</label> 
-					<textarea form ="courseAddForm" name="text" id="textArea-act" cols="35" class="form-control" placeholder="Mein liebster Kurs..."></textarea>
-				</div>
-			    
-				<div class="form-group">
-					<label
-						for="Dauer">Dauer</label> 
-					<input type="text" name="duration"
-						id="duration-act" placeholder="0 h 45 min"
-						class="text ui-widget-content ui-corner-all form-control" />
-				</div>
-				<!-- Allow form submission with keyboard without duplicating the dialog button -->
-				<input type="submit" tabindex="-1"
-					style="position: absolute; top: -1000px" />
+            </div>
+        </div>
+    </footer>
+    <!--/#footer-->
 
-				<script>
-					$('#duration-act').timepicker(
-							{
-								timeFormat : "H 'h' m 'min'",
-								timeText : 'Dauer',
-								timeOnlyTitle : 'Dauer wählen',
-								hourMax : 8,
-								stepMinute : 5,
-								beforeShow : function(input) {
-									setTimeout(function() {
-										$(input).datepicker("widget").find(
-												".ui-datepicker-current")
-												.hide();
-									}, 1);
-								}
-							});
-				</script>
-			</fieldset>
-		</form>
-	</div>
-	
+    <div id="dialog-form-activity" title="Aktivit&auml; hinzuf&uuml;gen">
+        <form id="activityAddForm">
+            <fieldset>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name-act" placeholder="Software Engineering" class="text ui-widget-content ui-corner-all form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="name">Text</label>
+                    <textarea form="courseAddForm" name="text" id="textArea-act" cols="35" class="form-control" placeholder="Mein liebster Kurs..."></textarea>
+                </div>
 
-	<div id="dialog-form-course" title="Kurs hinzuf&uuml;gen">
-		<form id="courseAddForm">
-			<fieldset>
-			    <div class="form-group">
-					<label for="name">Name</label> 
-					<input type="text" name="name"
-						id="name" placeholder="Software Engineering"
-						class="text ui-widget-content ui-corner-all form-control" /> 
-				</div>
-			    <div class="form-group">
-					<label for="name">Text</label> 
-					<textarea form ="courseAddForm" name="text" id="textArea" cols="35" class="form-control" placeholder="Mein liebster Kurs..."></textarea>
-				</div>
-			    <div class="form-group">
-				<label
-					for="Startzeit">Start</label> 
-				<input type="text" name="start"
-					id="startTime" placeholder="13.06.2015 18:42"
-					class="text ui-widget-content ui-corner-all form-control" /> <br /> 
-				</div>
-				<div class="form-group">
-					<label
-						for="Dauer">Dauer</label> 
-					<input type="text" name="duration"
-						id="endTime" placeholder="0 h 45 min"
-						class="text ui-widget-content ui-corner-all form-control" />
-				</div>
-				<div class="form-group">
-					<label
-						for="Dauer">Vorbereitung</label> 
-					<input type="text"
-						name="preparation" id="preparation" placeholder="0 h 15 min"
-						class="text ui-widget-content ui-corner-all form-control" />
-				</div>
-				<div class="form-group">
-					<label
-						for="Dauer">Nachbearbeitung</label> 
-					<input type="text"
-						name="rework" id="rework" placeholder="0 h 30 min"
-						class="text ui-widget-content ui-corner-all form-control" />
-				</div>
-				<div class="form-group">
-					 <label for="priority">Priorität:</label>
-					 <input id="priority" name="priority" class="form-control" value="4"/>
-					 
-				</div>
-				<!-- Allow form submission with keyboard without duplicating the dialog button -->
-				<input type="submit" tabindex="-1"
-					style="position: absolute; top: -1000px" />
+                <div class="form-group">
+                    <label for="Dauer">Dauer</label>
+                    <input type="text" name="duration" id="duration-act" placeholder="0 h 45 min" class="text ui-widget-content ui-corner-all form-control" />
+                </div>
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position: absolute; top: -1000px" />
+            </fieldset>
+        </form>
+    </div>
 
-				<script>
-				var spinner = $( "#priority" ).spinner();
-					$('#startTime').datetimepicker({
-						minDate : moment().startOf('week').toDate(),
-						maxDate : moment().endOf('week').toDate(),
-						hourMin : 6,
-						stepMinute : 5
-					});
+    <div id="dialog-form-options" title="Optionen Bearbeiten">
+        <form id="optionsForm">
+            <fieldset>
+                <div class="form-group">
+                    <label for="freedays">Gewünschte Freie Tage:</label>
+                    <input id="freedays" name="freedays" class="form-control" value="0" />
 
-					$('#endTime').timepicker(
-							{
-								timeFormat : "H 'h' m 'min'",
-								timeText : 'Dauer',
-								timeOnlyTitle : 'Dauer wählen',
-								hourMax : 8,
-								stepMinute : 5,
-								beforeShow : function(input) {
-									setTimeout(function() {
-										$(input).datepicker("widget").find(
-												".ui-datepicker-current")
-												.hide();
-									}, 1);
-								}
-							});
+                </div>
+                <div class="form-group">
+                    <label for="workload">Gewünschter Workload (in h):</label>
+                    <input id="workload" name="workload" class="form-control" value="-1" />
+                    <br /><small>(-1 = unlimitiert)</small>
+                </div>
+                <div class="form-group">
+                    <button id="resetButton" class="btn btn-lg btn-danger">Calender Leeren</button>
+                </div>
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position: absolute; top: -1000px" />
+            </fieldset>
+        </form>
+    </div>
 
-					$('#rework').timepicker(
-							{
-								timeFormat : "H 'h' m 'min'",
-								timeText : 'Dauer',
-								timeOnlyTitle : 'Dauer wählen',
-								hourMax : 8,
-								stepMinute : 5,
-								beforeShow : function(input) {
-									setTimeout(function() {
-										$(input).datepicker("widget").find(
-												".ui-datepicker-current")
-												.hide();
-									}, 1);
-								}
-							});
 
-					$('#preparation').timepicker(
-							{
-								timeFormat : "H 'h' m 'min'",
-								timeText : 'Dauer',
-								timeOnlyTitle : 'Dauer wählen',
-								hourMax : 8,
-								stepMinute : 5,
-								beforeShow : function(input) {
-									setTimeout(function() {
-										$(input).datepicker("widget").find(
-												".ui-datepicker-current")
-												.hide();
-									}, 1);
-								}
-							});
-				</script>
-			</fieldset>
-		</form>
-	</div>
+    <div id="dialog-form-course" title="Kurs hinzuf&uuml;gen">
+        <form id="courseAddForm">
+            <fieldset>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Software Engineering" class="text ui-widget-content ui-corner-all form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="name">Text</label>
+                    <textarea form="courseAddForm" name="text" id="textArea" cols="35" class="form-control" placeholder="Mein liebster Kurs..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="Startzeit">Start</label>
+                    <input type="text" name="start" id="startTime" placeholder="13.06.2015 18:42" class="text ui-widget-content ui-corner-all form-control" />
+                    <br />
+                </div>
+                <div class="form-group">
+                    <label for="Dauer">Dauer</label>
+                    <input type="text" name="duration" id="endTime" placeholder="0 h 45 min" class="text ui-widget-content ui-corner-all form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Dauer">Vorbereitung</label>
+                    <input type="text" name="preparation" id="preparation" placeholder="0 h 15 min" class="text ui-widget-content ui-corner-all form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Dauer">Nachbearbeitung</label>
+                    <input type="text" name="rework" id="rework" placeholder="0 h 30 min" class="text ui-widget-content ui-corner-all form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priorität:</label>
+                    <input id="priority" name="priority" class="form-control" value="4" />
 
-	<script>
-		$(function() {
-			'use strict';
-			
-			var calendar;
-			
-			$.post( "calendar/get", function(data) {
-				console.log("Got calendar id "+data['id']);
-				calendar = data;
-				renderCalendar(data);
-			});
-			
-			var timeRegex = /^(\d+)\D+(\d+)\D+$/i;
-			
-			function getSeconds(hoursAndMinutes) {
-				if(timeRegex.test(hoursAndMinutes)){
-					var results = timeRegex.exec(hoursAndMinutes);
-					return Number(results[1])*3600 + Number(results[2])*60;
-				}
-				return 0;
-			}
-			
-			function renderCourse(elem){
-				var event =
-						{
-						"start": elem['startTime'], 
-						"end": moment(elem['startTime']).add(elem['duration'], 'seconds'),
-						"title": elem['name'],
-						"text": elem['text'],
-						"id": elem['id']
-						};
-				
-				$("#calendar").fullCalendar( 'renderEvent', event, true ); 
-				
-				if(Number(elem['preparationTime']) > 0){
-					var event =
-					{
-					"start": moment(elem['startTime']).subtract(elem['preparationTime'], 'seconds'), 
-					"end": elem['startTime'], 
-					"title": "Vorbereitung\n"+elem['name'],
-					"id": elem['id'],
-					"color": "#E070E6"
-					};
-					$("#calendar").fullCalendar( 'renderEvent', event, true ); 
-				}
-				if(Number(elem['reworkTime']) > 0){
-					var event =
-					{
-					"start": moment(elem['startTime']).add(elem['duration'], 'seconds'),
-					"end": moment(elem['startTime']).add(elem['duration'], 'seconds').add(elem['reworkTime'], 'seconds'),
-					"title": "Nachbearbeitung\n"+elem['name'],
-					"id": elem['id'],
-					'color': '#B9E670'
-					};
-					$("#calendar").fullCalendar( 'renderEvent', event, true ); 
-				}
-			}
-			
-			function renderActivity(elem){
-				var event =
-				{
-				"start": elem['startTime'], 
-				"end": moment(elem['startTime']).add(elem['duration'], 'seconds'),
-				"title": elem['name'],
-				"text": elem['text'],
-				"id": elem['id']
-				};
-		
-				$("#calendar").fullCalendar( 'renderEvent', event, true ); 
-			}
-			
-			function renderCalendar(calData){
-				$('#calendar').fullCalendar('removeEvents');
-				
-				console.log("Rendering Calendar "+JSON.stringify(calData));
+                </div>
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position: absolute; top: -1000px" />
 
-				calData['courses'].forEach(renderCourse)
-				calData['activities'].forEach(renderActivity)
-			}
 
-			// ADD COURSE
-			var addCourseDialog, addCourseForm, addActivityDialog, addActivityForm, optionsDialog, optionsForm;
+            </fieldset>
+        </form>
+    </div>
 
-			addCourseDialog = $("#dialog-form-course")
-					.dialog(
-							{
-								autoOpen : false,
-								height : 600,
-								width : 400,
-								modal : true,
-								resizable : false,
-								draggable : false,
-								open: function() {
-						            $('.ui-widget-overlay').bind('click', function() {
-						                $('#dialog-form-course').dialog('close');
-						            })
-						        },
-								buttons : {
-									"Abbruch" : function() {
-										addCourseDialog.dialog("close");
-									},
-									"Tu es!" : function() {
-										var $dial = $(this), 
-											name = $dial.find("input[name='name']").val(), 
-											text = $dial.find("textarea").val(), 
-											start = $dial.find("input[name='start']").val(), 
-											duration = getSeconds($dial.find("input[name='duration']").val()), 
-											preparation = getSeconds($dial.find("input[name='preparation']").val()),
-											rework = getSeconds($dial.find("input[name='rework']").val()),
-											priority = Number($dial.find("input[name='priority']").val());
-										
-										var course = {
-											"name": name,
-											"text": text,
-											//09.06.2015 14:15 -> 2015-06-09T14:15:00.000
-											"startTime": moment(start, "DD.MM.YYYY HH:mm").format("YYYY-MM-DDTHH:mm:ss.SSS"),
-											"duration": duration,
-											"preparationTime": preparation,
-											"reworkTime": rework,
-											"priority": priority
-										};
-										
-										$.ajax({
-											  type: "POST",
-											  contentType: "application/json; charset=utf-8",
-											  url: "calendar/"+calendar['id']+"/course/new",
-											  data: JSON.stringify(course),
-											  success: function(data, textStatus, jqXHR){
-												  renderCourse(data);
-												  addCourseDialog.dialog("close");
-											  },
-											  error: function(jqXHR, textStatus, errorThrown){
-												  if(errorThrown === "Forbidden"){
-													  alert("Dieser Kurs überschneidet sich mit einem anderen Kurs!");
-												  } else {
-													  alert("Fehler: "+errorThrown);
-												  }
-												  addCourseDialog.dialog("close");
-											  }
-											});
-									}
-								},
-								close : function() {
-									addCourseForm[0].reset();
-									//allFields.removeClass("ui-state-error");
-								}
-							});
+    <script th:src="@{js/widgets.js}" src="../static/js/widgets.js"></script>
 
-			addCourseForm = addCourseDialog.find("form").on("submit",
-					function(event) {
-						event.preventDefault();
-						addUser();
-					});
-
-			$("#addcourse").on("click", function(e) {
-				e.preventDefault();
-				console.log("addcourse clicked!");
-				addCourseDialog.dialog("open");
-			});
-			
-			///Add ACTIVITY
-			addActivityDialog = $("#dialog-form-activity")
-					.dialog(
-							{
-								autoOpen : false,
-								height : 400,
-								width : 400,
-								modal : true,
-								resizable : false,
-								draggable : false,
-								open: function() {
-						            $('.ui-widget-overlay').bind('click', function() {
-						                $('#dialog-form-activity').dialog('close');
-						            })
-						        },
-								buttons : {
-									"Abbruch" : function() {
-										addActivityDialog.dialog("close");
-									},
-									"Tu es!" : function() {
-										var $dial = $(this), 
-											name = $dial.find("input[name='name']").val(), 
-											text = $dial.find("textarea").val(), 
-											duration = getSeconds($dial.find("input[name='duration']").val());
-											
-										
-										var activ = {
-											"name": name,
-											"text": text,
-											"duration": duration,
-										};
-										
-										$.ajax({
-											  type: "POST",
-											  contentType: "application/json; charset=utf-8",
-											  url: "calendar/"+calendar['id']+"/activity/new",
-											  data: JSON.stringify(activ),
-											  success: function(data, textStatus, jqXHR){
-												  renderActivity(data);
-												  addActivityDialog.dialog("close");
-											  },
-											  error: function(jqXHR, textStatus, errorThrown){
-												  if(errorThrown === "Conflict"){
-													  alert("Diese Aktivität kann nicht eingefügt werden.");
-												  } else {
-													  alert("Fehler: "+errorThrown);
-												  }
-												  addActivityDialog.dialog("close");
-											  }
-											});
-									}
-								},
-								close : function() {
-									addActivityForm[0].reset();
-									//allFields.removeClass("ui-state-error");
-								}
-							});
-
-			addActivityForm = addActivityDialog.find("form").on("submit",
-					function(event) {
-						event.preventDefault();
-						//addUser();
-					});
-
-			$("#addactivity").on("click", function(e) {
-				e.preventDefault();
-				console.log("addcactivity clicked!");
-				addActivityDialog.dialog("open");
-			});
-			
-
-			//UPLOAD
-			var url = 'calendar/upload';
-			$('#fileupload').fileupload(
-					{
-						url : url,
-						dataType : 'json',
-						done : function(e, data) {
-							$.each(data.result.files, function(index, file) {
-								$('<p/>').text(file.name).appendTo('#files');
-							});
-						},
-						progressall : function(e, data) {
-							var progress = parseInt(data.loaded / data.total
-									* 100, 10);
-							$('#progress .progress-bar').css('width',
-									progress + '%');
-						}
-					}).prop('disabled', !$.support.fileInput).parent()
-					.addClass($.support.fileInput ? undefined : 'disabled');
-		});
-		
-		setTimeout(function() {
-			$('.fc-today').removeClass('fc-today'); //remove current day hightlight from calendar
-		}, 1);
-		
-	</script>
+    <script th:src="@{js/home.js}" src="../static/js/home.js"></script>
 
 </body>
+
 </html>
