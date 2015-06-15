@@ -75,7 +75,8 @@ $(function() {
             "end": moment(elem['startTime']).add(elem['duration'], 'seconds'),
             "title": elem['name'],
             "text": elem['text'],
-            "id": elem['id']
+            "id": elem['id'],
+            "color": 'grey'
         };
 
         $("#calendar").fullCalendar('renderEvent', event, true);

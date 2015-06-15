@@ -44,7 +44,7 @@ public class SchedulerService {
 			System.out.println("Combined Workload for "+day+" would be "+newWorkloadMinutes/60+"h");
 			if (calendar.getOptions().getWorkload() > -1 && newWorkloadMinutes > maxWorkloadMinutes){
 				System.out.println("Aborted due to combined workload being "+newWorkloadMinutes+" max("+maxWorkloadMinutes+")");
-				return null;
+				continue;
 			}
 				
 
